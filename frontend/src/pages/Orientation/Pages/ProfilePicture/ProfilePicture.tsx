@@ -1,8 +1,18 @@
-import { useBatchAddListener, useBatchFinishListener } from "@rpldy/uploady";
+import { useBatchAddListener, useBatchFinishListener, withRequestPreSendUpdate } from "@rpldy/uploady";
 import UploadButton from "@rpldy/upload-button";
 import { useState } from "react";
 import { FileLike } from "@rpldy/shared";
 import { UploadPreview } from "@rpldy/upload-preview"
+import styled from "styled-components";
+import { Button } from "@mui/material";
+import CropperComponent from "./Cropper";
+import { generateProfileImg, userModel } from "../../../../models/userobserver";
+
+const CenterContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
 
 // Error type with similiar shape to the error type Uploady expects in its error-handling callback functions
 interface FileInvalidEventDetail {
@@ -29,7 +39,22 @@ function getErrorMsg(err: FileInvalidEventDetail) {
     return msg;
 }
 
+// Image Pre-processing
+const itemPreview = withRequestPreSendUpdate(({id, url, updateRequest, requestData }: any) => {
+    return (
+        <div>
+            <CropperComponent
+                id={id}
+                src={url}
+                updateRequest={updateRequest}
+                requestData={requestData} />
+        </div>
+    );
+});
+
 function ProfilePicture(props: any) {
+    const [user, setUser] = useState(userModel);
+    const [filesAdded, setFilesAdded] = useState(false);
     const [inputError, setInputError] = useState<FileInvalidEventDetail | null>(null);
 
     // Throw error if uploaded file is not of image type and bar Uploady from uploading the offending file
@@ -46,6 +71,7 @@ function ProfilePicture(props: any) {
             return false; // Prevents the upload from starting
         } else {
             setInputError(null);
+            setFilesAdded(true);
             return true;
         }
     });
@@ -56,15 +82,31 @@ function ProfilePicture(props: any) {
         // props.updateData([{ contentType: item.file.type, path: item.uploadResponse }]);
     });
 
+    function generateImg() {
+        setUser(prevUser => ({...prevUser, image: [generateProfileImg()]}));
+    }
+
     return (
-        <div>
+        <CenterContainer>
             {inputError && (
                 <div>{getErrorMsg(inputError)}</div>
             )}
+            
+            <UploadButton  />
 
-            <UploadPreview />
-            <UploadButton />
-        </div>
+            {!filesAdded ?
+                <>
+                    <img 
+                        src={user.image[0].path}
+                        alt="default upload" 
+                    />
+                    <Button onClick={generateImg}>Generate New Profile Image</Button>
+                </> :            
+                <UploadPreview
+                    PreviewComponent={itemPreview}
+                />
+            }
+        </CenterContainer>
     );
 }
 

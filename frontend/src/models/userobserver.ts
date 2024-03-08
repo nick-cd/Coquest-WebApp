@@ -41,7 +41,9 @@ export const userModel: User = {
     email: "",
     registered: false,
     location: null,
-    images: [],
+    images: [
+        generateProfileImg(),
+    ],
     motives: [],
     biography: "",
     communities: [],
@@ -51,6 +53,15 @@ export const userModel: User = {
     currentLevel: 0,
     recommendations: [],
 };
+
+export function generateProfileImg(): Image {
+    const randString = Math.random().toString(36).substring(2);
+
+    return {
+        contentType: "image/svg+xml",
+        path: `https://api.dicebear.com/7.x/thumbs/svg?size=400&radius=50&backgroundColor=transparent&seed=${randString}`,
+    };
+}
 
 // TODO: Business logic to bridge application with web API
 
