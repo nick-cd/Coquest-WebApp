@@ -31,7 +31,7 @@ interface ImageDimensions {
 
 function CropperComponent({id, src, updateRequest, requestData}: any) {
     const cropperRef = useRef<ReactCropperElement>(null);
-    const { imageUrl, setImageUrl, setImageType } = useCroppedImage();
+    const { imageUrl, setImageUrl, imageType } = useCroppedImage();
     const [ uploadedDimensions, setUploadedDimensions ] = useState<ImageDimensions>({width: 0, height: 0}); 
 
     // Resume the uploading process with the users crop selection 
@@ -40,13 +40,11 @@ function CropperComponent({id, src, updateRequest, requestData}: any) {
 
         if(cropper) {
             let file = requestData.items[0].file;
-            const imageType = file.type; 
             const cropData = cropper.getData(true);
             setUploadedDimensions({width: cropData.width, height: cropData.height});
             // Pass the image type to HTMLCanvasElement.toDataURL to prevent enlarging the image
             // https://github.com/fengyuanchen/cropperjs?tab=readme-ov-file#known-issues
-            setImageUrl(cropper.getCroppedCanvas().toDataURL(imageType));
-            setImageType(imageType);
+            setImageUrl(cropper.getCroppedCanvas().toDataURL(imageType ?? undefined));
 
             cropper.getCroppedCanvas({
                 rounded: true,
@@ -54,12 +52,13 @@ function CropperComponent({id, src, updateRequest, requestData}: any) {
                 imageSmoothingQuality: 'high',
             }).toBlob((blob: Blob | null) => {
                 if(blob) {
-                    file = new File([blob], file.name, {type: imageType});
-                    updateRequest({items: requestData.items});
+                    const croppedFile = new File([blob], file.name, {type: imageType ?? undefined});
+                    requestData.items[0].file = croppedFile;
+                    updateRequest({items: requestData.items });
                 }
-            }, imageType);
+            }, imageType ?? undefined);
         }
-    }, [updateRequest, requestData, setImageType, setImageUrl]);
+    }, [updateRequest, requestData, setImageUrl]);
 
     return (
         <CropContainer>

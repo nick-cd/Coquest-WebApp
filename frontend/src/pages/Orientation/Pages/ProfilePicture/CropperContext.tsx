@@ -3,6 +3,8 @@ import { ReactNode, createContext, useContext, useState } from 'react';
 interface CroppedImageContextType {
     imageUrl: string | null;
     setImageUrl: (url: string | null) => void;
+    imageRemotePath: string | null;
+    setImageRemotePath: (path: string | null) => void;
     imageType: string | null;
     setImageType: (type: string | null) => void;
 }
@@ -24,9 +26,10 @@ interface CroppedImageProviderProps {
 export const CroppedImageProvider = ({ children }: CroppedImageProviderProps) => {
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [imageType, setImageType] = useState<string | null>(null);
+    const [imageRemotePath, setImageRemotePath] = useState<string | null>(null);
 
     return (
-        <CroppedImageContext.Provider value={{ imageUrl, setImageUrl, imageType, setImageType}}>
+        <CroppedImageContext.Provider value={{ imageUrl, setImageUrl, imageRemotePath, setImageRemotePath, imageType, setImageType}}>
             {children}
         </CroppedImageContext.Provider>
     );

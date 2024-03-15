@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { Button } from "@mui/material";
 import CropperComponent from "./Cropper";
 import { generateProfileImg, userModel } from "../../../../models/userobserver";
+import { useCroppedImage } from "./CropperContext";
 
 const CenterContainer = styled.div`
 display: flex;
@@ -56,6 +57,7 @@ function ProfilePicture(props: any) {
     const [user, setUser] = useState(userModel);
     const [filesAdded, setFilesAdded] = useState(false);
     const [inputError, setInputError] = useState<FileInvalidEventDetail | null>(null);
+    const { imageRemotePath, setImageType, imageType } = useCroppedImage();
 
     // Throw error if uploaded file is not of image type and bar Uploady from uploading the offending file
     useBatchAddListener((batch) => {
@@ -70,6 +72,7 @@ function ProfilePicture(props: any) {
             });
             return false; // Prevents the upload from starting
         } else {
+            setImageType(batch.items[0].file.type);
             setInputError(null);
             setFilesAdded(true);
             return true;
@@ -77,9 +80,7 @@ function ProfilePicture(props: any) {
     });
 
     useBatchFinishListener((batch) => {
-        // TODO: Retrieve the upload URL
-        // const item = batch.items[0] 
-        // props.updateData([{ contentType: item.file.type, path: item.uploadResponse }]);
+        props.updateData([{ contentType: imageType, path: `${process.env.REACT_APP_STORAGE_URL!}/${imageRemotePath}` }]);
     });
 
     function generateImg() {
