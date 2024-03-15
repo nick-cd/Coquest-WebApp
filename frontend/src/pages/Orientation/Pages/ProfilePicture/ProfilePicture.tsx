@@ -83,7 +83,7 @@ function ProfilePicture(props: any) {
     });
 
     function generateImg() {
-        setUser(prevUser => ({...prevUser, image: [generateProfileImg()]}));
+        setUser(prevUser => ({...prevUser, images: [generateProfileImg()]}));
     }
 
     return (
@@ -97,7 +97,7 @@ function ProfilePicture(props: any) {
             {!filesAdded ?
                 <>
                     <img 
-                        src={user.image[0].path}
+                        src={user.images[0].path}
                         alt="default upload" 
                     />
                     <Button onClick={generateImg}>Generate New Profile Image</Button>
