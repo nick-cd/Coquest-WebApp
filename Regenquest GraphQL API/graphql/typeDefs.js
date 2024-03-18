@@ -137,7 +137,7 @@ module.exports = gql`
   union expandableCommunity = regenquestCommunity | string
 
   type regenquestNotification {
-    userID: String
+    _id: String
     notificationID: String
     title: String
     content: String
@@ -149,7 +149,7 @@ module.exports = gql`
   }
 
   input regenquestNotificationInput {
-    userID: String
+    id: String
     notificationID: String
     title: String
     content: String
@@ -198,7 +198,7 @@ module.exports = gql`
   }
 
   type regenquestTask {
-    taskID: String
+    _id: String
     userID: String
     questID: String
     createdAt: String
@@ -210,7 +210,7 @@ module.exports = gql`
   }
 
   input regenquestTaskInput {
-    taskID: String
+    id: String
     userID: String
     questID: String
     name: String
@@ -218,14 +218,13 @@ module.exports = gql`
     requirements: [String]
     completionStatus: Boolean
     history: [String]
-    sessionToken: String
   }
 
   """
   TODO: Modify data definition at a later time 
   """
   type regenquestQuest {
-    questID: String
+    _id: String
     name: String
     description: String
     objective: String
@@ -244,7 +243,7 @@ module.exports = gql`
   }
 
   input regenquestQuestInput {
-    questID: String
+    id: String
     name: String
     description: String
     objective: String
@@ -259,12 +258,11 @@ module.exports = gql`
     history: [String]
     budget: Float
     tasks: [String]
-    sessionToken: String
     hashtags: [String]
   }
 
   type regenquestPost {
-    postID: String
+    _id: String
     userID: String
     title: String
     description: String
@@ -275,17 +273,16 @@ module.exports = gql`
   }
 
   input regenquestPostInput {
-    postID: String
+    id: String
     userID: String
     title: String
     description: String
     attachments: [String]
     comments: [commentInput]
-    sessionToken: String
   }
 
   type regenquestInventory {
-    itemID: String
+    _id: String
     userID: String
     taskLink: String
     itemName: String
@@ -296,18 +293,17 @@ module.exports = gql`
   }
 
   input regenquestInventoryInput {
-    itemID: String
+    id: String
     userID: String
     taskLink: String
     itemName: String
     description: String
     image: [imageInput]
     history: [String]
-    sessionToken: String
   }
 
   type regenquestEvent {
-    eventID: String
+    _id: String
     name: String
     theme: String
     location: location
@@ -318,7 +314,7 @@ module.exports = gql`
   }
 
   input regenquestEventInput {
-    eventID: String
+    id: String
     name: String
     theme: String
     location: locationInput
@@ -326,7 +322,6 @@ module.exports = gql`
     description: String
     layer: String
     hashtags: [String]
-    sessionToken: String
   }
 
   type regenquestCommunity {
@@ -369,8 +364,7 @@ module.exports = gql`
   }
 
   type regenquestLoggedInUsers {
-    userID: String
-    sessionToken: String
+    _id: String
   }
 
   input loginUser {
@@ -379,7 +373,7 @@ module.exports = gql`
   }
 
   type regenquestChat {
-    chatID: String
+    _id: String
     members: [String]
     name: String
     description: String
@@ -387,14 +381,14 @@ module.exports = gql`
   }
 
   input regenquestChatInput {
-    chatID: String
+    id: String
     members: [String]
     name: String
     description: String
   }
 
   type regenquestMessage {
-    messageID: String
+    _id: String
     chatID: String
     sentFrom: String
     message: String
@@ -403,19 +397,19 @@ module.exports = gql`
   }
 
   input regenquestMessageInput {
-    messageID: String
+    id: String
     chatID: String
     sentFrom: String
     message: String
   }
 
   input addMemberToChatInput {
-    chatID: String
+    _id: String
     userID: String
   }
 
   input markMessageAsReadInput {
-    messageID: String
+    _id: String
     userID: String
   }
 
@@ -439,12 +433,6 @@ module.exports = gql`
 
     getChatsByUserID(userID: String): [regenquestChat]
     getMessagesByChatID(chatID: String): [regenquestMessage]
-
-    loginRegenquestUser(
-      username: String
-      password: String
-    ): regenquestLoggedInUsers
-    logoutRegenquestUser(sessionToken: String): mutationResponse
 
     getNotifications(userID: String): [regenquestNotification]
     getUnreadNotifications(userID: String): [regenquestNotification]
