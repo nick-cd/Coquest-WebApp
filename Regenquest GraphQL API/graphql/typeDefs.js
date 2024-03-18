@@ -4,7 +4,7 @@ const { gql } = require("apollo-server-cloud-functions");
 
 module.exports = gql`
   type regenquestNotification {
-    userID: String
+    _id: String
     notificationID: String
     title: String
     content: String
@@ -16,7 +16,7 @@ module.exports = gql`
   }
 
   input regenquestNotificationInput {
-    userID: String
+    id: String
     notificationID: String
     title: String
     content: String
@@ -57,7 +57,7 @@ module.exports = gql`
   }
 
   type regenquestUser {
-    userID: String
+    _id: String
     name: String
     username: String
     email: String
@@ -75,7 +75,7 @@ module.exports = gql`
   }
 
   input regenquestUserInput {
-    userID: String
+    id: String
     name: String
     username: String
     email: String
@@ -94,7 +94,7 @@ module.exports = gql`
   }
 
   type regenquestTask {
-    taskID: String
+    _id: String
     userID: String
     questID: String
     createdAt: String
@@ -106,7 +106,7 @@ module.exports = gql`
   }
 
   input regenquestTaskInput {
-    taskID: String
+    id: String
     userID: String
     questID: String
     name: String
@@ -118,7 +118,7 @@ module.exports = gql`
   }
 
   type regenquestQuest {
-    questID: String
+    _id: String
     name: String
     description: String
     objective: String
@@ -137,7 +137,7 @@ module.exports = gql`
   }
 
   input regenquestQuestInput {
-    questID: String
+    id: String
     name: String
     description: String
     objective: String
@@ -167,7 +167,7 @@ module.exports = gql`
   }
 
   type regenquestPost {
-    postID: String
+    _id: String
     userID: String
     title: String
     description: String
@@ -178,7 +178,7 @@ module.exports = gql`
   }
 
   input regenquestPostInput {
-    postID: String
+    id: String
     userID: String
     title: String
     description: String
@@ -188,7 +188,7 @@ module.exports = gql`
   }
 
   type regenquestInventory {
-    itemID: String
+    _id: String
     userID: String
     taskLink: String
     itemName: String
@@ -199,7 +199,7 @@ module.exports = gql`
   }
 
   input regenquestInventoryInput {
-    itemID: String
+    id: String
     userID: String
     taskLink: String
     itemName: String
@@ -210,7 +210,7 @@ module.exports = gql`
   }
 
   type regenquestEvent {
-    eventID: String
+    _id: String
     name: String
     theme: String
     location: String
@@ -221,7 +221,7 @@ module.exports = gql`
   }
 
   input regenquestEventInput {
-    eventID: String
+    id: String
     name: String
     theme: String
     location: String
@@ -245,7 +245,7 @@ module.exports = gql`
   }
 
   type regenquestCommunity {
-    communityID: String
+    _id: String
     name: String
     description: String
     members: [String]
@@ -254,7 +254,7 @@ module.exports = gql`
   }
 
   input regenquestCommunityInput {
-    communityID: String
+    id: String
     name: String
     description: String
     members: [String]
@@ -277,7 +277,7 @@ module.exports = gql`
   }
 
   type regenquestLoggedInUsers {
-    userID: String
+    _id: String
     sessionToken: String
   }
 
@@ -287,7 +287,7 @@ module.exports = gql`
   }
 
   type regenquestChat {
-    chatID: String
+    _id: String
     members: [String]
     name: String
     description: String
@@ -295,14 +295,14 @@ module.exports = gql`
   }
 
   input regenquestChatInput {
-    chatID: String
+    id: String
     members: [String]
     name: String
     description: String
   }
 
   type regenquestMessage {
-    messageID: String
+    _id: String
     chatID: String
     sentFrom: String
     message: String
@@ -311,19 +311,19 @@ module.exports = gql`
   }
 
   input regenquestMessageInput {
-    messageID: String
+    id: String
     chatID: String
     sentFrom: String
     message: String
   }
 
   input addMemberToChatInput {
-    chatID: String
+    _id: String
     userID: String
   }
 
   input markMessageAsReadInput {
-    messageID: String
+    _id: String
     userID: String
   }
 
