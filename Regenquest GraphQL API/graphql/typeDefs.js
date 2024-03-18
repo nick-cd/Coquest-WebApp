@@ -199,7 +199,6 @@ module.exports = gql`
 
   type regenquestTask {
     _id: String
-    _id: String
     userID: String
     questID: String
     createdAt: String
@@ -211,7 +210,6 @@ module.exports = gql`
   }
 
   input regenquestTaskInput {
-    id: String
     id: String
     userID: String
     questID: String
@@ -226,7 +224,6 @@ module.exports = gql`
   TODO: Modify data definition at a later time 
   """
   type regenquestQuest {
-    _id: String
     _id: String
     name: String
     description: String
@@ -247,7 +244,6 @@ module.exports = gql`
 
   input regenquestQuestInput {
     id: String
-    id: String
     name: String
     description: String
     objective: String
@@ -267,7 +263,6 @@ module.exports = gql`
 
   type regenquestPost {
     _id: String
-    _id: String
     userID: String
     title: String
     description: String
@@ -279,7 +274,6 @@ module.exports = gql`
 
   input regenquestPostInput {
     id: String
-    id: String
     userID: String
     title: String
     description: String
@@ -288,7 +282,6 @@ module.exports = gql`
   }
 
   type regenquestInventory {
-    _id: String
     _id: String
     userID: String
     taskLink: String
@@ -301,7 +294,6 @@ module.exports = gql`
 
   input regenquestInventoryInput {
     id: String
-    id: String
     userID: String
     taskLink: String
     itemName: String
@@ -311,7 +303,6 @@ module.exports = gql`
   }
 
   type regenquestEvent {
-    _id: String
     _id: String
     name: String
     theme: String
@@ -323,7 +314,6 @@ module.exports = gql`
   }
 
   input regenquestEventInput {
-    id: String
     id: String
     name: String
     theme: String
@@ -384,7 +374,6 @@ module.exports = gql`
 
   type regenquestChat {
     _id: String
-    _id: String
     members: [String]
     name: String
     description: String
@@ -393,14 +382,12 @@ module.exports = gql`
 
   input regenquestChatInput {
     id: String
-    id: String
     members: [String]
     name: String
     description: String
   }
 
   type regenquestMessage {
-    _id: String
     _id: String
     chatID: String
     sentFrom: String
@@ -411,7 +398,6 @@ module.exports = gql`
 
   input regenquestMessageInput {
     id: String
-    id: String
     chatID: String
     sentFrom: String
     message: String
@@ -419,12 +405,10 @@ module.exports = gql`
 
   input addMemberToChatInput {
     _id: String
-    _id: String
     userID: String
   }
 
   input markMessageAsReadInput {
-    _id: String
     _id: String
     userID: String
   }
