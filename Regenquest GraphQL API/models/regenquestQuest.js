@@ -17,7 +17,6 @@ const { model, Schema } = require("mongoose");
 //tasks: list of Ids of the tasks that belong to this quest
 //hashtags: list of hashtags corresponding to the quest
 const regenquestQuestSchema = new Schema({
-  questID: { type: String, unique: true },
   name: String,
   description: String,
   objective: String,

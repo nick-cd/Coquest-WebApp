@@ -11,7 +11,6 @@ const { model, Schema } = require("mongoose");
 //isDeleted: has this notification been deleted?
 const regenquestNotificationSchema = new Schema({
   userID: String,
-  notificationID: { type: String, unique: true },
   title: String,
   content: String,
   image: String,

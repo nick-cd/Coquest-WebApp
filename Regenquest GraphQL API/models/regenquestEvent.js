@@ -9,7 +9,6 @@ const { model, Schema } = require("mongoose");
 //layer: the layer this event blongs to
 //hashtags[]: list of all the hashtags for this event
 const regenquestEventSchema = new Schema({
-  eventID: { type: String, unique: true },
   name: String,
   theme: String,
   location: String,

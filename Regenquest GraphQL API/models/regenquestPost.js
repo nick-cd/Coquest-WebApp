@@ -9,7 +9,6 @@ const { model, Schema } = require("mongoose");
 //createdAt: when was the post created
 //comments: list of all the comments on the post
 const regenquestPostSchema = new Schema({
-  postID: { type: String, unique: true },
   userID: String,
   title: String,
   description: String,

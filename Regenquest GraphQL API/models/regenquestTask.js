@@ -10,7 +10,6 @@ const { model, Schema } = require("mongoose");
 //completionStatus: true if task is completed, false if task is not completed
 //history: history of the task
 const regenquestTaskSchema = new Schema({
-  taskID: { type: String, unique: true },
   userID: String,
   questID: String,
   createdAt: String,

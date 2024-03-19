@@ -9,7 +9,6 @@ const { model, Schema } = require("mongoose");
 //image: link to the image of the item
 //history: list of userID that owned this item previously
 const regenquestInventorySchema = new Schema({
-  itemID: { type: String, unique: true },
   userID: String,
   taskLink: String,
   itemName: String,

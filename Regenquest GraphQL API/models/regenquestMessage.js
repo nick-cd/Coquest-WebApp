@@ -7,7 +7,6 @@ const { model, Schema } = require("mongoose");
 //time: time this message was sent
 //unreadBy: list of users from chat that have not read the message
 const regenquestMessageSchema = new Schema({
-  messageID: { type: String, unique: true },
   chatID: String,
   sentFrom: String,
   message: String,

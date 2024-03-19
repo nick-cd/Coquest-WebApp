@@ -6,7 +6,6 @@ const { model, Schema } = require("mongoose");
 //description: description of the chat
 //createdAt: time the chat was created
 const regenquestChatSchema = new Schema({
-  chatID: { type: String, unique: true },
   members: [String],
   name: String,
   description: String,
