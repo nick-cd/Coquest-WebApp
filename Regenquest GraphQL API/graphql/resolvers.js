@@ -315,34 +315,13 @@ module.exports = {
       //generate a user token and add it to the db
       const newLogin = new LoggedIn({
         userID: user.userID,
-        sessionToken: uuid.v4(),
       });
 
       try {
         const res = await newLogin.save();
-        return { userID: newLogin.userID, sessionToken: newLogin.sessionToken };
+        return { userID: newLogin.userID};
       } catch (err) {
         throw new Error('Error logging in');
-      }
-    },
-
-    //this method logs out a regenquest user
-    async logoutRegenquestUser(parent, { sessionToken }, context, info) {
-      //check if a session token is provided
-      if (!sessionToken) {
-        throw new Error('Must provide a session token');
-      }
-
-      //check if the session token exists in the db
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        throw new Error('Invalid session token');
-      } else {
-        try {
-          const res = await LoggedIn.remove({ sessionToken: sessionToken });
-          return { code: 0, response: 'successful' };
-        } catch (err) {
-          throw new Error('Error logging out');
-        }
       }
     },
 
@@ -484,7 +463,6 @@ module.exports = {
       context,
       info
     ) {
-      //TODO: check if session token in Auth header is valid
 
       //create a User object
       const newUser = new User({
@@ -554,25 +532,14 @@ module.exports = {
           requirements,
           completionStatus,
           history,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if a session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
 
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
-
+      //TODO: check Auth token
+      
       //create a new task object
       const newTask = new Task({
         taskID: taskID ? taskID : null,
@@ -616,25 +583,14 @@ module.exports = {
           history,
           budget,
           tasks,
-          sessionToken,
           hashtags,
         },
       },
       context,
       info
     ) {
-      //check if a session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
 
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //create a new Quest object
       const newQuest = new Quest({
@@ -677,24 +633,12 @@ module.exports = {
           description,
           attachments,
           comments,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if a session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //create a new Post object
       const newPost = new Post({
@@ -730,24 +674,12 @@ module.exports = {
           description,
           image,
           history,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //create a new Inventory item object
       const newInventory = new Inventory({
@@ -784,24 +716,12 @@ module.exports = {
           description,
           layer,
           hashtags,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if a session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //create a new event object
       const newEvent = new Event({
@@ -1191,24 +1111,13 @@ module.exports = {
           requirements,
           completionStatus,
           history,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
 
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //check if task id is provided
       if (!taskID) {
@@ -1273,25 +1182,13 @@ module.exports = {
           history,
           budget,
           tasks,
-          sessionToken,
           hashtags,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //check is quest id is provided
       if (!questID) {
@@ -1371,24 +1268,12 @@ module.exports = {
           description,
           attachments,
           comments,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //check if post id is provided
       if (!postID) {
@@ -1439,24 +1324,12 @@ module.exports = {
           description,
           image,
           history,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //check if item id is provided
       if (!itemID) {
@@ -1509,24 +1382,12 @@ module.exports = {
           description,
           layer,
           hashtags,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      //TODO: check Auth token
 
       //check if event id is provided
       if (!eventID) {
