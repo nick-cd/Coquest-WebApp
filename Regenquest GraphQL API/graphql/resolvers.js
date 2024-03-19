@@ -297,34 +297,8 @@ module.exports = {
       }
     },
 
-    //this method is used to login a regenquest user
-    async loginRegenquestUser(parent, { username, password }, context, info) {
-      //check if the user exists
-      const user = await User.findOne({ username: username });
-      if (!user) {
-        throw new Error('user not found');
-      }
-
-      //check if password matches
-      const result = await bcrypt.compare(password, user.password);
-
-      if (!result) {
-        throw new Error('Password does not match');
-      }
-
-      //generate a user token and add it to the db
-      const newLogin = new LoggedIn({
-        userID: user.userID,
-      });
-
-      try {
-        const res = await newLogin.save();
-        return { userID: newLogin.userID};
-      } catch (err) {
-        throw new Error('Error logging in');
-      }
-    },
-
+    //this method is used to login a regenquest user 
+  
     //this method gets all the notification for a user by thier id
     async getNotifications(parent, { userID }, context, info) {
       //check if userID is provided
