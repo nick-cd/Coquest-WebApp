@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
 
 //chatID: unique id of the chat
 //members: user ids of all the members
@@ -6,10 +6,16 @@ const { model, Schema } = require("mongoose");
 //description: description of the chat
 //createdAt: time the chat was created
 const regenquestChatSchema = new Schema({
-  members: [String],
+  members: [{
+    type: mongoose.ObjectId,
+    ref: 'regenquestUser'
+  }],
   name: String,
   description: String,
-  createdAt: String,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
 });
 
 module.exports = model("regenquestChat", regenquestChatSchema);

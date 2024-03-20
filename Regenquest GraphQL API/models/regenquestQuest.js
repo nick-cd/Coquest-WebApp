@@ -1,4 +1,5 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default:mongoose } = require("mongoose");
+const { locationSchema } = require("./common");
 
 //questID: unique id of the quest
 //name: name of the quest
@@ -17,20 +18,26 @@ const { model, Schema } = require("mongoose");
 //tasks: list of Ids of the tasks that belong to this quest
 //hashtags: list of hashtags corresponding to the quest
 const regenquestQuestSchema = new Schema({
-  name: String,
+  name: { type: String, required: true },
   description: String,
   objective: String,
   initiative: String,
-  type: String,
+  type: { type: String, enum: ['project', 'program', 'coop'], required: true }, // Enum to define the types of quests
   duration: String,
-  location: String,
-  startDate: String,
-  endDate: String,
+  location: locationSchema,
+  startDate: { type: Date },
+  endDate: { type: Date },
   requirements: [String],
-  members: [String],
+  members: [{ 
+    type: mongoose.ObjectId, 
+    ref: 'regenquestUser'
+  }],
   history: [String],
   budget: Number,
-  tasks: [String],
+  tasks: [{
+    type: mongoose.ObjectId, 
+    ref: 'regenquestTask'
+  }],
   hashtags: [String],
 });
 

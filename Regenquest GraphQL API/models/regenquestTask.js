@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
 
 //taskID: unique id of the task
 //userID: Id of the user that this task currently belongs to
@@ -10,13 +10,21 @@ const { model, Schema } = require("mongoose");
 //completionStatus: true if task is completed, false if task is not completed
 //history: history of the task
 const regenquestTaskSchema = new Schema({
-  userID: String,
-  questID: String,
-  createdAt: String,
-  name: String,
+  userID: {
+    type: mongoose.ObjectId,
+    required: true,
+    ref: 'regenquestUser'
+  },
+  questID: {
+    type: mongoose.ObjectId,
+    required: true,
+    ref: 'regenquestQuest'
+  },
+  createdAt: { type: Date, default: Date.now },
+  name: { type: String, required: true },
   description: String,
   requirements: [String],
-  completionStatus: Boolean,
+  completionStatus: { type: Boolean, default: false },
   history: [String],
 });
 

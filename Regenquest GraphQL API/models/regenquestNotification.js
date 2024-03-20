@@ -1,4 +1,5 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
+const { imageSchema } = require("./common");
 
 //userID: id of the user that this notification belongs to
 //notificationID: unique id of the notification
@@ -10,14 +11,18 @@ const { model, Schema } = require("mongoose");
 //isRead: has this notification been read?
 //isDeleted: has this notification been deleted?
 const regenquestNotificationSchema = new Schema({
-  userID: String,
-  title: String,
-  content: String,
-  image: String,
+  userID: {
+    type: mongoose.ObjectId,
+    ref: 'regenquestUser',
+    required: true
+  },
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  image: imageSchema,
   link: String,
-  date: String,
-  isRead: Boolean,
-  isDeleted: Boolean,
+  date: { type: Date, default: Date.now },
+  isRead: { type: Boolean, default: false },
+  isDeleted: { type: Boolean, default: false },
 });
 
 module.exports = model("regenquestNotification", regenquestNotificationSchema);

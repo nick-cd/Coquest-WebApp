@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
 
 //messageID: unique id of the message
 //chatID: id of the chat the message belongs to
@@ -7,11 +7,28 @@ const { model, Schema } = require("mongoose");
 //time: time this message was sent
 //unreadBy: list of users from chat that have not read the message
 const regenquestMessageSchema = new Schema({
-  chatID: String,
-  sentFrom: String,
-  message: String,
-  time: String,
-  unreadBy: [String],
+  chatID: {
+    type: mongoose.ObjectId,
+    ref: 'regenquestChat',
+    required: true
+  },
+  sentFrom: {
+    type: mongoose.ObjectId,
+    ref: 'regenquestUser',
+    required: true
+  },
+  message: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: Date,
+    default: Date.now
+  },
+  unreadBy: [{
+    type: mongoose.ObjectId,
+    ref: 'regenquestUser'
+  }],
 });
 
 module.exports = model("regenquestMessage", regenquestMessageSchema);
