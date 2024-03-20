@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
 
 //postID: unique id of the post
 //userID: ID of the user that made the post
@@ -9,13 +9,23 @@ const { model, Schema } = require("mongoose");
 //createdAt: when was the post created
 //comments: list of all the comments on the post
 const regenquestPostSchema = new Schema({
-  userID: String,
-  title: String,
+  userID: {
+    type: mongoose.ObjectId,
+    ref: 'regenquestUser',
+    required: true
+  },
+  title: { type: String, required: true },
   description: String,
-  likes: Number,
+  likes: { type: Number, default: 0 },
   attachments: [String],
-  createdAt: String,
-  comments: [{ username: String, body: String }],
+  createdAt: { type: Date, default: Date.now },
+  comments: [{
+    userID: {  
+      type: mongoose.ObjectId,
+      ref: 'regenquestUser',
+      required: true },
+    body: { type: String, required: true },
+  }],
 });
 
 module.exports = model("regenquestPost", regenquestPostSchema);
