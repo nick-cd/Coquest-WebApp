@@ -480,7 +480,8 @@ module.exports = {
             phoneNumber: '1234567890', // dummy phone number
             regenquestUserId: newUser._id,
           });
-          await newCrossPlatformUser.save();
+          const res = await newCrossPlatformUser.save();
+          newUser.userID = res._id;
         }
 
         await newUser.save();
@@ -765,7 +766,6 @@ module.exports = {
       {
         userInput: {
           userID,
-          notificationID,
           title,
           content,
           image,
@@ -783,15 +783,9 @@ module.exports = {
         return { code: 1, response: 'Error! must provide userID' };
       }
 
-      //check if the notificationID is provided
-      if (!notificationID) {
-        return { code: 1, response: 'Error! must provide notificationID' };
-      }
-
       //create a new notificaiton object
       const newNotification = new Notification({
         userID: userID,
-        notificationID: notificationID,
         title: title ? title : null,
         content: content ? content : null,
         image: image ? image : null,
