@@ -488,7 +488,7 @@ module.exports = {
         return { code: 0, response: 'successful' };
       } catch (err) {
         console.log(err);
-        return { code: 1, response: 'Error creating user.' };
+        return { code: 1, response: `Error creating user: ${err.message}` };
       }
     },
 
@@ -530,7 +530,7 @@ module.exports = {
         const res = await newTask.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating task.' };
+        return { code: 1, response: `Error creating task: ${err.message}` };
       }
     },
 
@@ -587,7 +587,7 @@ module.exports = {
         const res = await newQuest.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating quest.' };
+        return { code: 1, response: `Error creating quest: ${err.message}` };
       }
     },
 
@@ -625,7 +625,7 @@ module.exports = {
         const res = await newPost.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating post.' };
+        return { code: 1, response: `Error creating post: ${err.message}` };
       }
     },
 
@@ -664,7 +664,7 @@ module.exports = {
         const res = await newInventory.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating item.' };
+        return { code: 1, response: `Error creating item: ${err.message}` };
       }
     },
 
@@ -704,7 +704,7 @@ module.exports = {
         const res = await newEvent.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating Event.' };
+        return { code: 1, response: `Error creating Event: ${err.message}` };
       }
     },
 
@@ -744,7 +744,7 @@ module.exports = {
         return { code: 0, response: 'successful' };
       } catch (err) {
         console.log(err);
-        return { code: 1, response: 'Error creating community.' };
+        return { code: 1, response: `Error creating community: ${err.message}` };
       }
     },
 
@@ -789,7 +789,7 @@ module.exports = {
         const res = await newNotification.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating notification.' };
+        return { code: 1, response: `Error creating notification: ${err.message}` };
       }
     },
 
@@ -820,7 +820,7 @@ module.exports = {
         const res = await newChat.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating chat.' };
+        return { code: 1, response: `Error creating chat: ${err.message}` };
       }
     },
 
@@ -868,7 +868,7 @@ module.exports = {
         const res = await newMessage.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error creating message.' };
+        return { code: 1, response: `Error creating message: ${err.message}` };
       }
     },
 
@@ -907,7 +907,7 @@ module.exports = {
         );
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error adding member to chat.' };
+        return { code: 1, response: `Error adding member to chat: ${err.message}` };
       }
     },
 
@@ -940,7 +940,7 @@ module.exports = {
         );
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error marking message as read.' };
+        return { code: 1, response: `Error marking message as read: ${err.message}` };
       }
     },
 
@@ -1043,7 +1043,7 @@ module.exports = {
         return { code: 0, response: 'successful' };
       } catch (err) {
         console.log(err);
-        return { code: 1, response: 'Error updating user.' };
+        return { code: 1, response: `Error updating user: ${err.message}` };
       }
     },
 
@@ -1107,7 +1107,7 @@ module.exports = {
         const res = await Task.updateOne({ _id: id }, updateTask);
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error updating task.' };
+        return { code: 1, response: `Error updating task: ${err.message}` };
       }
     },
 
@@ -1202,7 +1202,7 @@ module.exports = {
         const res = await Quest.updateOne({ _id: id }, updateQuest);
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error updating quest.' };
+        return { code: 1, response: `Error updating quest: ${err.message}` };
       }
     },
 
@@ -1257,7 +1257,7 @@ module.exports = {
         const res = await Post.updateOne({ _id: id }, updatePost);
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error updating post.' };
+        return { code: 1, response: `Error updating post: ${err.message}` };
       }
     },
 
@@ -1314,7 +1314,7 @@ module.exports = {
         const res = await Inventory.updateOne({ _id: id }, updateItem);
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error updating inventory.' };
+        return { code: 1, response: `Error updating inventory: ${err.message}` };
       }
     },
 
@@ -1376,7 +1376,7 @@ module.exports = {
         const res = await Event.updateOne({ _id: id }, updateEvent);
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error updating event.' };
+        return { code: 1, response: `Error updating event: ${err.message}` };
       }
     },
 
@@ -1439,7 +1439,7 @@ module.exports = {
         return { code: 0, response: 'successful' };
       } catch (err) {
         console.log(err);
-        return { code: 1, response: 'Error updating community.' };
+        return { code: 1, response: `Error updating community: ${err.message}` };
       }
     },
 
@@ -1468,7 +1468,7 @@ module.exports = {
 
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error updating genres.' };
+        return { code: 1, response: `Error updating genres: ${err.message}` };
       }
     },
 
@@ -1533,7 +1533,7 @@ module.exports = {
         );
         return { code: 0, response: 'successful' };
       } catch (err) {
-        return { code: 1, response: 'Error updating notification.' };
+        return { code: 1, response: `Error updating notification: ${err.message}` };
       }
     },
   },
