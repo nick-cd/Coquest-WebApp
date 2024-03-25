@@ -10,6 +10,8 @@ const LoggedIn = require('../models/regenquestLoggedInUsers');
 const Notification = require('../models/regenquestNotification');
 const Chat = require('../models/regenquestChat');
 const Message = require('../models/regenquestMessage');
+const Topic = require('../models/regenquestTopic');
+const Motive = require('../models/regenquestMotive');
 const CrossPlatformUser = require('../models/crossPlatform/User');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
@@ -151,6 +153,26 @@ module.exports = {
         return result;
       } catch (err) {
         throw new Error('Error getting communities');
+      }
+    },
+
+    //this method returns all the regenquest topics
+    async getTopics() {
+      try {
+        const result = await Topic.find();
+        return result;
+      } catch (err) {
+        throw new Error('Error getting topics');
+      }
+    },
+
+    //this method returns all the regenquest motives
+    async getMotives() {
+      try {
+        const result = await Motive.find();
+        return result;
+      } catch (err) {
+        throw new Error('Error getting motives');
       }
     },
 

@@ -26,26 +26,6 @@ module.exports = gql`
   }
 
   """
-  Temporary enums containing hard-coded values in place of an independant collections.
-
-  In the future, we will dynamically fetch available topics and motives.
-  """
-  enum topic {
-    SPORTS
-    ARTS
-    MUSIC
-    GENERATIVE_ART
-    BASKETBALL
-  }
-  
-  enum motive {
-    VOLUNTEER
-    INITIATER
-    ORGANIZER
-    SPECTATOR
-  }
-
-  """
   Discriminator types for unionized types 
   """
   enum registeredRepType {
@@ -168,9 +148,9 @@ module.exports = gql`
     registered: registered
     location: location
     images: [image]
-    motives: [motive]
+    motives: String
     biography: String
-    topics: [topic]
+    topics: String
     communities: [expandableCommunity]
     skills: [skill]
     badges: [badge]
@@ -187,9 +167,9 @@ module.exports = gql`
     registered: registeredInput
     location: locationInput
     images: [imageInput]
-    motives: [motive]
+    motives: String
     biography: String
-    topics: [topic]
+    topics: String
     communities: [communityInput]
     skills: [skillInput]
     badges: [badgeInput]
@@ -421,7 +401,9 @@ module.exports = gql`
     getItems: [regenquestInventory]
     getEvents: [regenquestEvent]
     getCommunities: [regenquestCommunity]
-    getGenres: regenquestGenres
+    getGenres: [regenquestGenres]
+    getTopics: [regenquestTopic]
+    getMotives: [regenquestMotive]
 
     findUserbyID(id: String): regenquestUser
     findTaskbyID(taskID: String): regenquestTask
