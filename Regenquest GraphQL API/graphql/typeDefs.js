@@ -148,9 +148,9 @@ module.exports = gql`
     registered: registered
     location: location
     images: [image]
-    motives: String
+    motives: [String]
     biography: String
-    topics: String
+    topics: [String]
     communities: [expandableCommunity]
     skills: [skill]
     badges: [badge]
@@ -167,9 +167,9 @@ module.exports = gql`
     registered: registeredInput
     location: locationInput
     images: [imageInput]
-    motives: String
+    motives: [String]
     biography: String
-    topics: String
+    topics: [String]
     communities: [communityInput]
     skills: [skillInput]
     badges: [badgeInput]
@@ -309,7 +309,7 @@ module.exports = gql`
     name: String
     description: String
     members: [expandableUser]
-    tags: [topic]
+    tags: [String]
     location: location
     images: [image]
   }
@@ -325,7 +325,7 @@ module.exports = gql`
     name: String
     description: String
     members: [userInput]
-    tags: [topic]
+    tags: [String]
     location: locationInput
     images: [imageInput]
   }
